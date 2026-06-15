@@ -87,6 +87,22 @@ pyinstaller --onefile --windowed --name VoiceToText main.py
 ```
 Produces `dist/VoiceToText.exe` (Windows) or `dist/VoiceToText.app` (macOS).
 
+Optional: Core ML / Apple Neural Engine (advanced, extra perf gain for apple M chip)
+Core ML runs the encoder on the ANE for a further ~2–3× on small models, but it's fiddly and not needed for good performance. Only do this if you want maximum speed:
+bash# use an isolated conda env so it doesn't break your system Python
+conda create -n coreml python=3.11 -y
+conda activate coreml
+pip install torch openai-whisper ane_transformers coremltools
+cd /Users/you/Downloads/whisper.cpp
+./models/generate-coreml-model.sh base.en   # -> models/ggml-base.en-encoder.mlmodelc
+conda deactivate
+
+# then rebuild whisper.cpp WITH Core ML support:
+rm -rf build
+cmake -B build -DWHISPER_COREML=1
+cmake --build build -j --config Release
+The .mlmodelc must sit next to the .bin. The first run is slow while macOS compiles the model for your chip; subsequent runs are fast. Important: only build with -DWHISPER_COREML=1 after the .mlmodelc exists, or the binary will refuse to start.
+
 ## Roadmap (later versions)
 
 - Multi-language GUI + Whisper language models.
