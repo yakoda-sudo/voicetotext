@@ -7,6 +7,8 @@ and (optionally) cleans + compresses the text with a local LLM via Ollama.
 Both the raw draft and the optimized result are copied to your clipboard
 automatically.
 
+<img width="1672" height="210" alt="image" src="https://github.com/user-attachments/assets/56aa07ff-5765-4f4a-ad9a-59b0f97538ab" />
+
 ## Features (v0.1)
 
 - **Tiny floating window** (Tkinter, borderless, always-on-top, draggable). No
