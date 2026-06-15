@@ -1,0 +1,15 @@
+# Core runtime dependencies
+sounddevice>=0.4.6        # microphone capture
+pyperclip>=1.8.2          # cross-platform clipboard (optional but recommended)
+
+# Transcription backend (choose at least one)
+openai-whisper>=20231117  # default "whisper" backend (no ffmpeg needed; WAV decoded via stdlib)
+numpy>=1.24               # WAV decoding for the whisper backend (also pulled in by whisper)
+# whisper.cpp backend requires a compiled binary + GGML model (no pip package)
+
+# Optimization backend
+# Ollama is a separate app: https://ollama.com  — pull a model, e.g. `ollama pull llama3.2`
+# The Ollama optimizer uses only the Python standard library (urllib).
+
+# Packaging (optional)
+# pyinstaller>=6.0

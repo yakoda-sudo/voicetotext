@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voicetotext"
+version = "0.1.0"
+description = "Local, offline voice-to-text desktop tool (record → transcribe → AI-optimize)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = [
+    "sounddevice>=0.4.6",
+    "pyperclip>=1.8.2",
+]
+
+[project.optional-dependencies]
+whisper = ["openai-whisper>=20231117"]
+build = ["pyinstaller>=6.0"]
+
+[project.scripts]
+voicetotext = "voicetotext.ui:run"
+
+[tool.setuptools]
+packages = [
+    "voicetotext",
+    "voicetotext.audio",
+    "voicetotext.transcribe",
+    "voicetotext.optimize",
+    "voicetotext.ui",
+    "voicetotext.utils",
+]
